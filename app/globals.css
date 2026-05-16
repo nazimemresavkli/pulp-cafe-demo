@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  /* PULP — gece, lacivert, neon */
   --bg: #0A1020;
   --bg-2: #0F1729;
   --bg-3: #1A2240;
@@ -72,11 +71,11 @@ html, body {
   padding: 0 40px;
 }
 @media (max-width: 768px) {
-  .container-lux { padding: 0 20px; }
+  .container-lux { padding: 0 16px; }
 }
 .section { padding: 120px 0; }
 @media (max-width: 768px) {
-  .section { padding: 72px 0; }
+  .section { padding: 56px 0; }
 }
 
 /* ─── HAIRLINES ─── */
@@ -145,11 +144,16 @@ html, body {
   border: 1px solid var(--electric);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  position: relative;
 }
 .btn-electric:hover {
   box-shadow: var(--glow);
   transform: translateY(-1px);
+}
+@media (max-width: 768px) {
+  .btn-primary, .btn-ghost, .btn-electric {
+    padding: 12px 22px;
+    font-size: 11px;
+  }
 }
 
 /* ─── LİNKLER ─── */
@@ -182,8 +186,6 @@ html, body {
 .img-zoom:hover img, .img-zoom:hover > div { transform: scale(1.04); }
 
 /* ─── MODERNİTE ─── */
-
-/* Section numara prefixi */
 .section-num {
   display: inline-flex;
   align-items: baseline;
@@ -201,8 +203,11 @@ html, body {
   height: 1px;
   background: var(--electric);
 }
+@media (max-width: 768px) {
+  .section-num { font-size: 10px; gap: 12px; }
+  .section-num::before { width: 28px; }
+}
 
-/* Spec row — teknik veri şeridi */
 .spec-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -230,11 +235,15 @@ html, body {
 }
 @media (max-width: 768px) {
   .spec-row { grid-template-columns: repeat(2, 1fr); }
+  .spec-row > div {
+    padding: 18px 14px;
+    border-right: 1px solid var(--line);
+  }
   .spec-row > div:nth-child(2) { border-right: none; }
   .spec-row > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .spec-row .spec-value { font-size: 22px; }
 }
 
-/* Neon frame — outlined kart */
 .frame {
   border: 1px solid var(--line-2);
   background: var(--bg-2);
@@ -246,7 +255,6 @@ html, body {
   box-shadow: 0 0 0 1px var(--electric), 0 0 40px -8px rgba(77, 139, 245, 0.3);
 }
 
-/* Tag pill */
 .tag-pill {
   display: inline-flex;
   align-items: center;
@@ -268,7 +276,6 @@ html, body {
   background: rgba(77, 139, 245, 0.06);
 }
 
-/* Live indicator */
 .live-dot {
   display: inline-block;
   width: 8px;
@@ -279,7 +286,6 @@ html, body {
   animation: pulse-glow 2.4s ease-out infinite;
 }
 
-/* Display number — büyük italik rakam dekorasyonu */
 .display-num {
   font-family: var(--font-fraunces), Georgia, serif;
   font-style: italic;
@@ -292,28 +298,35 @@ html, body {
   pointer-events: none;
 }
 
-/* Subtle dotted grid background */
 .bg-grid {
   background-image:
     radial-gradient(circle, rgba(240, 244, 250, 0.04) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
-/* Radyal arka plan vurgusu */
 .bg-radial-glow {
   background:
     radial-gradient(ellipse 80% 60% at 50% 0%, rgba(45, 90, 135, 0.3), transparent 60%),
     var(--bg);
 }
-.bg-radial-glow-bottom {
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(45, 90, 135, 0.25), transparent 60%),
-    var(--bg);
-}
 
-/* Glow text */
 .glow-text { text-shadow: 0 0 32px rgba(111, 177, 255, 0.4); }
 .glow-soft { box-shadow: 0 0 60px -10px rgba(77, 139, 245, 0.3); }
+
+/* ─── MARQUEE ─── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.marquee > * {
+  font-size: clamp(22px, 4.5vw, 40px) !important;
+  padding-right: clamp(28px, 5vw, 64px) !important;
+}
 
 /* ─── ANİMASYONLAR ─── */
 @keyframes fade-up {
@@ -327,10 +340,6 @@ html, body {
 @keyframes coin-flip {
   0% { transform: rotateY(-180deg); opacity: 0; }
   100% { transform: rotateY(0deg); opacity: 1; }
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
 }
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 0 0 rgba(77, 139, 245, 0.6), 0 0 12px var(--electric); }
@@ -353,13 +362,7 @@ html, body {
   perspective: 800px;
 }
 
-.marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 38s linear infinite;
-}
-
-/* ─── PREMIUM SCROLLBAR ─── */
+/* ─── SCROLLBAR ─── */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--line-2); }
@@ -385,6 +388,7 @@ html, body {
 .border-line-2 { border-color: var(--line-2); }
 .border-electric { border-color: var(--electric); }
 
+/* ─── GRID-12 ─── */
 .grid-12 {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -392,4 +396,61 @@ html, body {
 }
 @media (max-width: 768px) {
   .grid-12 { gap: 16px; }
+  .grid-12 > * {
+    grid-column: span 12 / span 12 !important;
+    padding-left: 0 !important;
+  }
+}
+
+/* ─── MASONRY (galeri) — DOĞRU SÜRÜM ─── */
+.masonry {
+  column-count: 3;
+  column-gap: 16px;
+}
+.masonry > * {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  display: block;
+}
+@media (max-width: 1024px) {
+  .masonry { column-count: 2; }
+}
+@media (max-width: 480px) {
+  .masonry { column-count: 1; }
+}
+
+/* ─── STICKY FILTER (menu/galeri/blog) ─── */
+.sticky-filter {
+  position: sticky;
+  top: 124px;
+  z-index: 30;
+  background: rgba(15, 23, 41, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+@media (max-width: 768px) {
+  .sticky-filter { top: 84px; }
+}
+
+/* ─── MENU KARTLARI mobile compact ─── */
+.menu-card {
+  background: var(--bg);
+  padding: 36px 28px;
+  transition: background 0.4s ease;
+  cursor: pointer;
+}
+.menu-card:hover { background: var(--bg-3); }
+.menu-card h3 {
+  font-family: var(--font-fraunces), serif;
+  font-weight: 300;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+@media (max-width: 768px) {
+  .menu-card { padding: 22px 18px; }
+  .menu-card h3 { font-size: 20px; }
 }

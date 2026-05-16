@@ -51,15 +51,15 @@ export default function MenuPage() {
         <div className="bg-grid absolute inset-0 opacity-50" />
         <div
           className="container-lux relative"
-          style={{ paddingTop: 120, paddingBottom: 80 }}
+          style={{ paddingTop: 96, paddingBottom: 64 }}
         >
-          <div className="section-num mb-16 fu">
+          <div className="section-num mb-12 fu">
             <span>Menü</span>
           </div>
           <h1
             className="serif text-balance fu1"
             style={{
-              fontSize: "clamp(48px, 9vw, 144px)",
+              fontSize: "clamp(40px, 9vw, 144px)",
               lineHeight: 0.94,
               letterSpacing: "-0.035em",
               maxWidth: "14ch",
@@ -76,12 +76,13 @@ export default function MenuPage() {
             .
           </h1>
           <p
-            className="fu2 mt-12"
+            className="fu2"
             style={{
-              fontSize: 17,
+              fontSize: "clamp(14px, 1.5vw, 17px)",
               lineHeight: 1.7,
               color: "var(--ink-2)",
               maxWidth: "48ch",
+              marginTop: 32,
             }}
           >
             Tek köken çekirdekler ve seçilmiş demleme yöntemleri. Fiyatlar
@@ -90,24 +91,13 @@ export default function MenuPage() {
         </div>
       </section>
 
-      {/* FİLTRE ÇUBUĞU */}
-      <section
-        className="sticky top-[124px] z-30"
-        style={{
-          background: "rgba(15, 23, 41, 0.85)",
-          backdropFilter: "blur(20px)",
-          borderTop: "1px solid var(--line)",
-          borderBottom: "1px solid var(--line)",
-        }}
-      >
+      {/* FİLTRE — sticky */}
+      <section className="sticky-filter">
         <div
-          className="container-lux flex items-center gap-3 overflow-x-auto"
-          style={{ padding: "20px 40px" }}
+          className="container-lux flex items-center gap-2 overflow-x-auto no-scrollbar"
+          style={{ padding: "14px 16px" }}
         >
-          <span
-            className="eyebrow whitespace-nowrap"
-            style={{ marginRight: 8 }}
-          >
+          <span className="eyebrow whitespace-nowrap" style={{ marginRight: 4 }}>
             Filtre
           </span>
           {CATEGORIES.map((c) => (
@@ -124,29 +114,29 @@ export default function MenuPage() {
       </section>
 
       {/* MENU GRID */}
-      <section className="section bg-deep">
+      <section
+        className="bg-deep"
+        style={{ paddingTop: 56, paddingBottom: 56 }}
+      >
         <div className="container-lux">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px"
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px"
             style={{ background: "var(--line)" }}
           >
             {filtered.map((item, i) => (
               <article
                 key={item.name + i}
+                className="menu-card group"
                 style={{
-                  background: "var(--bg)",
-                  padding: "40px 32px",
-                  position: "relative",
-                  transition: "background 0.4s ease",
-                  animation: `fade-up 0.6s cubic-bezier(0.215,0.61,0.355,1) ${(i % 9) * 0.06}s both`,
+                  animation: `fade-up 0.5s cubic-bezier(0.215,0.61,0.355,1) ${(i % 9) * 0.05}s both`,
                 }}
-                className="hover:bg-card group cursor-pointer"
               >
-                <div className="flex items-start justify-between mb-12">
+                <div className="flex items-start justify-between mb-8">
                   <Glyph type={item.glyph} />
                   <span
                     className="mono"
                     style={{
-                      fontSize: 11,
+                      fontSize: 10,
                       letterSpacing: "0.16em",
                       color: "var(--ink-3)",
                       textTransform: "uppercase",
@@ -155,33 +145,25 @@ export default function MenuPage() {
                     {item.cat}
                   </span>
                 </div>
-                <h3
-                  className="serif mb-2"
-                  style={{
-                    fontSize: 28,
-                    letterSpacing: "-0.02em",
-                    lineHeight: 1.1,
-                  }}
-                >
-                  {item.name}
-                </h3>
+                <h3>{item.name}</h3>
                 <div
-                  className="mono mb-4"
+                  className="mono"
                   style={{
-                    fontSize: 11,
+                    fontSize: 10,
                     letterSpacing: "0.18em",
                     color: "var(--electric)",
                     textTransform: "uppercase",
+                    marginBottom: 12,
                   }}
                 >
                   {item.origin}
                 </div>
                 <p
                   style={{
-                    fontSize: 14,
-                    lineHeight: 1.7,
+                    fontSize: 13,
+                    lineHeight: 1.6,
                     color: "var(--ink-2)",
-                    marginBottom: 24,
+                    marginBottom: 18,
                   }}
                 >
                   {item.desc}
@@ -189,21 +171,24 @@ export default function MenuPage() {
                 <div
                   className="flex items-center justify-between"
                   style={{
-                    paddingTop: 20,
+                    paddingTop: 14,
                     borderTop: "1px solid var(--line)",
                   }}
                 >
                   <span
                     className="serif-italic"
                     style={{
-                      fontSize: 24,
+                      fontSize: 20,
                       color: "var(--cyan)",
                       letterSpacing: "-0.01em",
                     }}
                   >
                     {item.price}
                   </span>
-                  <span className="eyebrow group-hover:text-electric transition-colors">
+                  <span
+                    className="eyebrow group-hover:text-electric transition-colors"
+                    style={{ fontSize: 10 }}
+                  >
                     Menüde Gör →
                   </span>
                 </div>
@@ -212,7 +197,7 @@ export default function MenuPage() {
           </div>
 
           {filtered.length === 0 && (
-            <div className="text-center py-32">
+            <div className="text-center py-24">
               <p style={{ color: "var(--ink-3)" }} className="eyebrow">
                 Bu kategoride şu an ürün yok
               </p>
@@ -223,16 +208,16 @@ export default function MenuPage() {
 
       {/* CTA */}
       <section
-        className="relative overflow-hidden"
-        style={{ background: "var(--bg-2)", padding: "120px 0" }}
+        className="section relative overflow-hidden"
+        style={{ background: "var(--bg-2)" }}
       >
         <div className="container-lux relative">
-          <div className="grid-12 items-end gap-y-12">
+          <div className="grid-12 items-end gap-y-10">
             <div style={{ gridColumn: "span 7 / span 7" }}>
               <h2
                 className="serif text-balance"
                 style={{
-                  fontSize: "clamp(36px, 6vw, 88px)",
+                  fontSize: "clamp(32px, 6vw, 88px)",
                   lineHeight: 1.02,
                   letterSpacing: "-0.03em",
                   maxWidth: "16ch",
@@ -247,7 +232,7 @@ export default function MenuPage() {
             </div>
             <div
               style={{ gridColumn: "span 5 / span 5" }}
-              className="flex flex-col items-start md:items-end gap-4"
+              className="flex flex-wrap items-start md:items-end gap-4 md:flex-col md:items-end"
             >
               <Link href="/iletisim" className="btn-electric">
                 Mağazaya Gel
@@ -271,9 +256,9 @@ export default function MenuPage() {
 function Glyph({ type }: { type: string }) {
   const stroke = "var(--electric)";
   const sw = 1.4;
-  const size = 40;
+  const size = 32;
 
-  if (type === "espresso") {
+  if (type === "espresso")
     return (
       <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
         <path d="M8 14h22v8c0 6-5 11-11 11s-11-5-11-11v-8z" stroke={stroke} strokeWidth={sw} />
@@ -281,59 +266,48 @@ function Glyph({ type }: { type: string }) {
         <path d="M14 6c0 2-2 3-2 5M20 6c0 2-2 3-2 5M26 6c0 2-2 3-2 5" stroke={stroke} strokeWidth={sw} />
       </svg>
     );
-  }
-  if (type === "v60") {
+  if (type === "v60")
     return (
       <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
         <path d="M8 8h24l-10 18h-4L8 8z" stroke={stroke} strokeWidth={sw} />
-        <path d="M18 26v6M22 26v6M14 32h12" stroke={stroke} strokeWidth={sw} />
+        <path d="M18 26v6M22 26v6 M14 32h12" stroke={stroke} strokeWidth={sw} />
       </svg>
     );
-  }
-  if (type === "aeropress") {
+  if (type === "aeropress")
     return (
       <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
         <rect x="13" y="6" width="14" height="22" rx="1" stroke={stroke} strokeWidth={sw} />
         <path d="M13 12h14M16 28v4h8v-4" stroke={stroke} strokeWidth={sw} />
       </svg>
     );
-  }
-  if (type === "cold") {
+  if (type === "cold")
     return (
       <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
         <path d="M14 6h12v22c0 3-2 5-6 5s-6-2-6-5V6z" stroke={stroke} strokeWidth={sw} />
         <circle cx="20" cy="22" r="1.5" fill={stroke} />
         <circle cx="17" cy="17" r="1" fill={stroke} />
-        <circle cx="23" cy="25" r="1" fill={stroke} />
       </svg>
     );
-  }
-  if (type === "cortado") {
+  if (type === "cortado")
     return (
       <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
         <path d="M10 16h18v10c0 3-3 6-9 6s-9-3-9-6V16z" stroke={stroke} strokeWidth={sw} />
         <path d="M28 18h3a2 2 0 0 1 0 4h-3" stroke={stroke} strokeWidth={sw} />
-        <path d="M14 22h10" stroke={stroke} strokeWidth={sw} opacity="0.4" />
       </svg>
     );
-  }
-  if (type === "flatwhite") {
+  if (type === "flatwhite")
     return (
       <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
         <path d="M8 14h22v10c0 4-4 8-11 8s-11-4-11-8V14z" stroke={stroke} strokeWidth={sw} />
-        <path d="M30 16h3a2.5 2.5 0 0 1 0 5h-3" stroke={stroke} strokeWidth={sw} />
         <path d="M14 20c2 1 4 1 6 0s4-1 6 0" stroke={stroke} strokeWidth={sw} />
       </svg>
     );
-  }
-  if (type === "plate") {
+  if (type === "plate")
     return (
       <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
         <ellipse cx="20" cy="24" rx="14" ry="3" stroke={stroke} strokeWidth={sw} />
         <ellipse cx="20" cy="22" rx="10" ry="2" stroke={stroke} strokeWidth={sw} />
-        <path d="M16 18c1-2 3-3 4-3s3 1 4 3" stroke={stroke} strokeWidth={sw} />
       </svg>
     );
-  }
   return null;
 }
